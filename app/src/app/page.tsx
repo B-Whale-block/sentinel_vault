@@ -162,7 +162,7 @@ export default function Dashboard() {
       </main>
 
       <footer className="mx-auto mt-16 max-w-6xl text-center">
-        <p className="text-xs text-cyber-green/30">SENTINEL_VAULT // SECURE_TOKEN_PROTOCOL // 2024</p>
+        <p className="text-xs text-cyber-green/30">SENTINEL_VAULT // SECURE_TOKEN_PROTOCOL // 2026</p>
       </footer>
     </div>
   );
