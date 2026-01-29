@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cyber-green: #00ff41;
+  --cyber-green-dim: #00cc33;
+  --cyber-purple: #bf00ff;
+  --cyber-blue: #00d4ff;
+  --cyber-red: #ff0040;
+  --cyber-yellow: #ffff00;
+  --cyber-dark: #0a0a0f;
+  --cyber-darker: #050508;
+}
+
+body {
+  background-color: var(--cyber-darker);
+  color: var(--cyber-green);
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--cyber-darker); }
+::-webkit-scrollbar-thumb { background: var(--cyber-green-dim); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--cyber-green); }
+
+.text-glow { text-shadow: 0 0 10px var(--cyber-green), 0 0 20px var(--cyber-green), 0 0 30px var(--cyber-green); }
+.text-glow-purple { text-shadow: 0 0 10px var(--cyber-purple), 0 0 20px var(--cyber-purple), 0 0 30px var(--cyber-purple); }
+.text-glow-blue { text-shadow: 0 0 10px var(--cyber-blue), 0 0 20px var(--cyber-blue), 0 0 30px var(--cyber-blue); }
+.text-glow-red { text-shadow: 0 0 10px var(--cyber-red), 0 0 20px var(--cyber-red); }
+
+.cyber-card {
+  @apply relative overflow-hidden rounded-lg border border-cyber-green/30 bg-cyber-dark/80 p-6 backdrop-blur-sm;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.1), inset 0 0 20px rgba(0, 255, 65, 0.05);
+}
+.cyber-card::before {
+  content: "";
+  @apply absolute left-0 top-0 h-px w-full;
+  background: linear-gradient(90deg, transparent, var(--cyber-green), transparent);
+}
+.cyber-card-purple {
+  @apply border-cyber-purple/30;
+  box-shadow: 0 0 20px rgba(191, 0, 255, 0.1), inset 0 0 20px rgba(191, 0, 255, 0.05);
+}
+.cyber-card-purple::before { background: linear-gradient(90deg, transparent, var(--cyber-purple), transparent); }
+.cyber-card-red {
+  @apply border-cyber-red/30;
+  box-shadow: 0 0 20px rgba(255, 0, 64, 0.1), inset 0 0 20px rgba(255, 0, 64, 0.05);
+}
+.cyber-card-red::before { background: linear-gradient(90deg, transparent, var(--cyber-red), transparent); }
+
+.cyber-btn {
+  @apply relative overflow-hidden rounded border border-cyber-green/50 bg-cyber-green/10 px-6 py-3 font-mono font-semibold uppercase tracking-wider text-cyber-green transition-all duration-300;
+}
+.cyber-btn:hover:not(:disabled) {
+  @apply border-cyber-green bg-cyber-green/20;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.3), inset 0 0 20px rgba(0, 255, 65, 0.1);
+}
+.cyber-btn:active:not(:disabled) { @apply scale-95; }
+.cyber-btn:disabled { @apply cursor-not-allowed opacity-50; }
+.cyber-btn-purple { @apply border-cyber-purple/50 bg-cyber-purple/10 text-cyber-purple; }
+.cyber-btn-purple:hover:not(:disabled) {
+  @apply border-cyber-purple bg-cyber-purple/20;
+  box-shadow: 0 0 20px rgba(191, 0, 255, 0.3), inset 0 0 20px rgba(191, 0, 255, 0.1);
+}
+.cyber-btn-red { @apply border-cyber-red/50 bg-cyber-red/10 text-cyber-red; }
+.cyber-btn-red:hover:not(:disabled) {
+  @apply border-cyber-red bg-cyber-red/20;
+  box-shadow: 0 0 20px rgba(255, 0, 64, 0.3), inset 0 0 20px rgba(255, 0, 64, 0.1);
+}
+
+.cyber-input {
+  @apply w-full rounded border border-cyber-green/30 bg-cyber-darker/80 px-4 py-3 font-mono text-cyber-green placeholder-cyber-green/40 outline-none transition-all duration-300;
+}
+.cyber-input:focus {
+  @apply border-cyber-green;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.2), inset 0 0 10px rgba(0, 255, 65, 0.05);
+}
+.cyber-input-red { @apply border-cyber-red/30 text-cyber-red placeholder-cyber-red/40; }
+.cyber-input-red:focus {
+  @apply border-cyber-red;
+  box-shadow: 0 0 10px rgba(255, 0, 64, 0.2), inset 0 0 10px rgba(255, 0, 64, 0.05);
+}
+
+.status-dot {
+  @apply h-2 w-2 rounded-full;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+.status-dot-green { @apply bg-cyber-green; box-shadow: 0 0 10px var(--cyber-green); }
+.status-dot-red { @apply bg-cyber-red; box-shadow: 0 0 10px var(--cyber-red); }
+
+.cyber-spinner { @apply h-5 w-5 animate-spin rounded-full border-2 border-cyber-green/30 border-t-cyber-green; }
+
+/* Wallet adapter theme overrides */
+.wallet-adapter-button { @apply cyber-btn !important; font-family: var(--font-mono), monospace !important; }
+.wallet-adapter-button-trigger { @apply cyber-btn-purple !important; }
+.wallet-adapter-modal-wrapper { @apply bg-cyber-dark/95 !important; backdrop-filter: blur(10px); }
+.wallet-adapter-modal-container { @apply border border-cyber-purple/30 !important; box-shadow: 0 0 40px rgba(191, 0, 255, 0.2) !important; }
+.wallet-adapter-modal-title { @apply text-cyber-purple !important; font-family: var(--font-mono), monospace !important; }
+.wallet-adapter-modal-list li { @apply border-b border-cyber-purple/20 !important; }
+.wallet-adapter-modal-list-more { @apply text-cyber-purple !important; }
+
+@keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+.cursor-blink::after { content: "_"; animation: blink 1s step-end infinite; }
+.hex-badge { clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
+@keyframes glitch { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(-2px, -2px); } 60% { transform: translate(2px, 2px); } 80% { transform: translate(2px, -2px); } 100% { transform: translate(0); } }
+.glitch:hover { animation: glitch 0.3s ease-in-out; }

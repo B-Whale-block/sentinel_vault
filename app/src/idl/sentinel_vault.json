@@ -1,0 +1,69 @@
+{
+  "version": "0.1.0",
+  "name": "sentinel_vault",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        { "name": "admin", "isMut": true, "isSigner": true },
+        { "name": "sentinelConfig", "isMut": true, "isSigner": false },
+        { "name": "oldTokenMint", "isMut": false, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": []
+    },
+    {
+      "name": "deposit",
+      "accounts": [
+        { "name": "user", "isMut": true, "isSigner": true },
+        { "name": "sentinelConfig", "isMut": true, "isSigner": false },
+        { "name": "userVault", "isMut": true, "isSigner": false },
+        { "name": "vaultTokenAccount", "isMut": true, "isSigner": false },
+        { "name": "userTokenAccount", "isMut": true, "isSigner": false },
+        { "name": "oldTokenMint", "isMut": false, "isSigner": false },
+        { "name": "tokenProgram", "isMut": false, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [{ "name": "amount", "type": "u64" }]
+    },
+    {
+      "name": "withdraw",
+      "accounts": [
+        { "name": "user", "isMut": true, "isSigner": true },
+        { "name": "sentinelConfig", "isMut": true, "isSigner": false },
+        { "name": "userVault", "isMut": true, "isSigner": false },
+        { "name": "vaultTokenAccount", "isMut": true, "isSigner": false },
+        { "name": "userTokenAccount", "isMut": true, "isSigner": false },
+        { "name": "vaultAuthority", "isMut": false, "isSigner": false },
+        { "name": "oldTokenMint", "isMut": false, "isSigner": false },
+        { "name": "tokenProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [{ "name": "amount", "type": "u64" }]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "SentinelConfig",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "authority", "type": "publicKey" },
+          { "name": "oldTokenMint", "type": "publicKey" }
+        ]
+      }
+    },
+    {
+      "name": "UserVault",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "user", "type": "publicKey" },
+          { "name": "oldTokenDeposited", "type": "u64" }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "address": "ERjqtieYDomjRpxswqWm5tmZT3LbazL3Zoy42xPdHdBY"
+  }
+}
