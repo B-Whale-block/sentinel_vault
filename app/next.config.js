@@ -1,36 +1,20 @@
 /** @type {import('next').NextConfig} */
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
 const nextConfig = {
   output: "export",
-  basePath,
-  assetPrefix: basePath,
   images: { unoptimized: true },
   trailingSlash: true,
+  
+  // 1. FAST BUILD: Skip the heavy tracing that is causing the hang-up
+  outputFileTracing: false, 
+  
+  // 2. SAFETY: Ignore errors to get the site live
+  eslint: { ignoreDuringBuilds: true },
+  typescript: { ignoreBuildErrors: true },
 
-  // 1. Safety: Bypass errors to get the site live
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-
-  // 2. Webpack Configuration (Merging both logic blocks)
+  // 3. SOLANA FIX: Handle browser fallbacks
   webpack: (config) => {
-    // Handling Solana/Browser fallbacks
-    config.resolve.fallback = { 
-      fs: false, 
-      path: false, 
-      os: false, 
-      crypto: false 
-    };
-
-    // Handling the pino-pretty warning
-    config.externals.push({
-      'pino-pretty': 'pino-pretty',
-    });
-
+    config.resolve.fallback = { fs: false, path: false, os: false, crypto: false };
+    config.externals.push({ 'pino-pretty': 'pino-pretty' });
     return config;
   },
 };
