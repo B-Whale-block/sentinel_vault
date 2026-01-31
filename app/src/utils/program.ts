@@ -40,19 +40,22 @@ export const pda = {
   vaultToken: () => findPDA([Buffer.from(SEEDS.vaultToken)]),
 };
 
+// Default DEX program (can be Jupiter, Raydium, etc. - using a placeholder for testing)
+export const DEFAULT_DEX_PROGRAM = new PublicKey("JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4");
+
 export async function initialize(
   program: Program,
-  admin: PublicKey,
-  oldTokenMint: PublicKey
+  authority: PublicKey,
+  oldTokenMint: PublicKey,
+  dexProgramId: PublicKey = DEFAULT_DEX_PROGRAM
 ): Promise<string> {
   const [sentinelConfig] = pda.config();
 
   return program.methods
-    .initialize(oldTokenMint)
+    .initialize(oldTokenMint, dexProgramId)
     .accounts({
-      admin,
+      authority,
       sentinelConfig,
-      oldTokenMint,
       systemProgram: SystemProgram.programId,
     })
     .rpc();
@@ -62,22 +65,21 @@ export async function deposit(
   program: Program,
   user: PublicKey,
   amount: BN,
-  mint: PublicKey
+  mint: PublicKey,
+  vaultOldTokenAccount: PublicKey
 ): Promise<string> {
   const [sentinelConfig] = pda.config();
   const [userVault] = pda.userVault(user);
-  const [vaultTokenAccount] = pda.vaultToken();
-  const userTokenAccount = await getAssociatedTokenAddress(mint, user);
+  const userOldTokenAccount = await getAssociatedTokenAddress(mint, user);
 
   return program.methods
     .deposit(amount)
     .accounts({
       user,
-      sentinelConfig,
       userVault,
-      vaultTokenAccount,
-      userTokenAccount,
-      oldTokenMint: mint,
+      sentinelConfig,
+      userOldTokenAccount,
+      vaultOldTokenAccount,
       tokenProgram: TOKEN_PROGRAM_ID,
       systemProgram: SystemProgram.programId,
     })
@@ -88,24 +90,23 @@ export async function withdraw(
   program: Program,
   user: PublicKey,
   amount: BN,
-  mint: PublicKey
+  mint: PublicKey,
+  vaultOldTokenAccount: PublicKey
 ): Promise<string> {
   const [sentinelConfig] = pda.config();
   const [userVault] = pda.userVault(user);
-  const [vaultTokenAccount] = pda.vaultToken();
   const [vaultAuthority] = pda.vaultAuthority();
-  const userTokenAccount = await getAssociatedTokenAddress(mint, user);
+  const userOldTokenAccount = await getAssociatedTokenAddress(mint, user);
 
   return program.methods
     .withdraw(amount)
     .accounts({
       user,
-      sentinelConfig,
       userVault,
-      vaultTokenAccount,
-      userTokenAccount,
+      sentinelConfig,
       vaultAuthority,
-      oldTokenMint: mint,
+      vaultOldTokenAccount,
+      userOldTokenAccount,
       tokenProgram: TOKEN_PROGRAM_ID,
     })
     .rpc();
@@ -118,6 +119,12 @@ export async function fetchConfig(program: Program): Promise<SentinelConfig | nu
   } catch {
     return null;
   }
+}
+
+// Get the vault's token account address (ATA for vault_authority)
+export async function getVaultTokenAccount(mint: PublicKey): Promise<PublicKey> {
+  const [vaultAuthority] = pda.vaultAuthority();
+  return getAssociatedTokenAddress(mint, vaultAuthority, true);
 }
 
 export async function fetchUserVault(program: Program, user: PublicKey): Promise<UserVault | null> {

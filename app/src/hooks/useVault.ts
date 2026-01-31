@@ -11,6 +11,7 @@ import {
   withdraw,
   fetchUserVault,
   getTokenBalance,
+  getVaultTokenAccount,
   formatAmount,
   parseAmount,
   TOKEN_MINT,
@@ -118,8 +119,10 @@ export function useVault() {
       return false;
     }
 
+    const vaultTokenAccount = await getVaultTokenAccount(TOKEN_MINT);
+
     return execTx(
-      () => deposit(program, publicKey, parseAmount(amount), TOKEN_MINT),
+      () => deposit(program, publicKey, parseAmount(amount), TOKEN_MINT, vaultTokenAccount),
       "Deposited!",
       "Processing deposit..."
     );
@@ -135,8 +138,10 @@ export function useVault() {
       return false;
     }
 
+    const vaultTokenAccount = await getVaultTokenAccount(TOKEN_MINT);
+
     return execTx(
-      () => withdraw(program, publicKey, parseAmount(amount), TOKEN_MINT),
+      () => withdraw(program, publicKey, parseAmount(amount), TOKEN_MINT, vaultTokenAccount),
       "Withdrawn!",
       "Processing withdrawal..."
     );
