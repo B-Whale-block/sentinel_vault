@@ -92,6 +92,7 @@ export default function Dashboard() {
                 onSubmit={onDeposit}
                 loading={loading}
                 buttonText="EXECUTE_DEPOSIT"
+                maxBalance={walletBalance}
               />
               <ActionCard
                 title="Emergency Exit"
@@ -102,6 +103,7 @@ export default function Dashboard() {
                 onSubmit={onWithdraw}
                 loading={loading}
                 buttonText="EXECUTE_WITHDRAW"
+                maxBalance={vaultBalance}
               />
             </div>
 
@@ -218,6 +220,7 @@ function ActionCard({
   onSubmit,
   loading,
   buttonText,
+  maxBalance,
 }: {
   title: string;
   icon: React.ReactNode;
@@ -227,8 +230,31 @@ function ActionCard({
   onSubmit: () => void;
   loading: boolean;
   buttonText: string;
+  maxBalance: string;
 }) {
   const isRed = variant === "red";
+
+  // Parse the balance string (handles comma formatting)
+  const parseBalance = (bal: string) => {
+    const num = parseFloat(bal.replace(/,/g, ""));
+    return isNaN(num) ? 0 : num;
+  };
+
+  const setPercentage = (percent: number) => {
+    const max = parseBalance(maxBalance);
+    const amount = (max * percent) / 100;
+    if (amount > 0) {
+      onChange(amount.toFixed(4).replace(/\.?0+$/, ""));
+    }
+  };
+
+  const percentButtons = [
+    { label: "25%", value: 25 },
+    { label: "50%", value: 50 },
+    { label: "75%", value: 75 },
+    { label: "MAX", value: 100 },
+  ];
+
   return (
     <div className={`cyber-card ${isRed ? "cyber-card-red" : ""}`}>
       <h2 className={`mb-6 flex items-center gap-3 text-xl font-bold uppercase tracking-wider ${isRed ? "text-cyber-red" : "text-cyber-green"}`}>
@@ -237,9 +263,14 @@ function ActionCard({
       </h2>
       <div className="space-y-4">
         <div>
-          <label className={`mb-2 block text-xs uppercase tracking-wider ${isRed ? "text-cyber-red/60" : "text-cyber-green/60"}`}>
-            Amount
-          </label>
+          <div className="mb-2 flex items-center justify-between">
+            <label className={`text-xs uppercase tracking-wider ${isRed ? "text-cyber-red/60" : "text-cyber-green/60"}`}>
+              Amount
+            </label>
+            <span className={`text-xs ${isRed ? "text-cyber-red/40" : "text-cyber-green/40"}`}>
+              Available: {maxBalance}
+            </span>
+          </div>
           <input
             type="number"
             value={value}
@@ -248,6 +279,22 @@ function ActionCard({
             className={`cyber-input ${isRed ? "cyber-input-red" : ""}`}
             disabled={loading}
           />
+        </div>
+        <div className="flex gap-2">
+          {percentButtons.map((btn) => (
+            <button
+              key={btn.label}
+              onClick={() => setPercentage(btn.value)}
+              disabled={loading || parseBalance(maxBalance) === 0}
+              className={`flex-1 rounded border px-2 py-1.5 text-xs font-semibold uppercase transition-all ${
+                isRed
+                  ? "border-cyber-red/30 text-cyber-red/70 hover:border-cyber-red hover:bg-cyber-red/10 disabled:opacity-30"
+                  : "border-cyber-green/30 text-cyber-green/70 hover:border-cyber-green hover:bg-cyber-green/10 disabled:opacity-30"
+              }`}
+            >
+              {btn.label}
+            </button>
+          ))}
         </div>
         <button onClick={onSubmit} disabled={loading || !value} className={`cyber-btn w-full ${isRed ? "cyber-btn-red" : ""}`}>
           {loading ? <Spinner color={variant} text="Processing..." /> : buttonText}
