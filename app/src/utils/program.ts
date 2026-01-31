@@ -40,19 +40,15 @@ export const pda = {
   vaultToken: () => findPDA([Buffer.from(SEEDS.vaultToken)]),
 };
 
-// Default DEX program (can be Jupiter, Raydium, etc. - using a placeholder for testing)
-export const DEFAULT_DEX_PROGRAM = new PublicKey("JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4");
-
 export async function initialize(
   program: Program,
   authority: PublicKey,
-  oldTokenMint: PublicKey,
-  dexProgramId: PublicKey = DEFAULT_DEX_PROGRAM
+  oldTokenMint: PublicKey
 ): Promise<string> {
   const [sentinelConfig] = pda.config();
 
   return program.methods
-    .initialize(oldTokenMint, dexProgramId)
+    .initialize(oldTokenMint)
     .accounts({
       authority,
       sentinelConfig,
