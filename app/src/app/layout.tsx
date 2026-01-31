@@ -7,7 +7,35 @@ const font = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", displ
 
 export const metadata: Metadata = {
   title: "Sentinel Vault | Dashboard",
-  description: "Secure token vault protocol on Solana Devnet",
+  description: "Secure token migration protocol on Solana. Trustless liquidity migration with proportional token distribution.",
+  keywords: ["Solana", "DeFi", "Token Migration", "Vault", "Crypto", "Web3"],
+  authors: [{ name: "Sentinel Vault" }],
+  openGraph: {
+    title: "Sentinel Vault",
+    description: "Secure token migration protocol on Solana. Trustless liquidity migration with proportional token distribution.",
+    url: "https://sentinel-vault.vercel.app",
+    siteName: "Sentinel Vault",
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "Sentinel Vault - Secure Token Migration Protocol",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sentinel Vault",
+    description: "Secure token migration protocol on Solana. Trustless liquidity migration with proportional token distribution.",
+    images: ["/og-image.svg"],
+  },
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
