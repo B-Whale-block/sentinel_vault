@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#000000"/>
+  <g transform="translate(128, 80)">
+    <!-- Padlock shackle (the U-shaped top part) -->
+    <path 
+      d="M 48 160 L 48 96 C 48 43 91 0 144 0 C 197 0 240 43 240 96 L 240 160" 
+      fill="none" 
+      stroke="#39FF14" 
+      stroke-width="28" 
+      stroke-linecap="round"
+      filter="url(#glow)"
+    />
+    <!-- Padlock body (rounded rectangle) -->
+    <rect 
+      x="16" 
+      y="144" 
+      width="224" 
+      height="176" 
+      rx="24" 
+      ry="24" 
+      fill="#39FF14"
+      filter="url(#glow)"
+    />
+    <!-- Keyhole circle -->
+    <circle cx="128" cy="220" r="28" fill="#000000"/>
+    <!-- Keyhole slot -->
+    <rect x="116" y="220" width="24" height="56" rx="8" fill="#000000"/>
+  </g>
+  <!-- Neon glow filter -->
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+</svg>
