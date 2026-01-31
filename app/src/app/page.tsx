@@ -35,18 +35,20 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen px-4 py-8">
-      <header className="mx-auto mb-12 flex max-w-6xl items-center justify-between">
-        <div className="flex items-center gap-4">
-          <div className="relative flex h-12 w-12 items-center justify-center">
+      <header className="mx-auto mb-8 flex max-w-6xl flex-col gap-4 sm:mb-12 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <div className="relative flex h-10 w-10 flex-shrink-0 items-center justify-center sm:h-12 sm:w-12">
             <div className="absolute inset-0 animate-pulse rounded-lg bg-cyber-green/20" />
-            <LockIcon className="relative z-10 h-8 w-8 text-cyber-green" />
+            <LockIcon className="relative z-10 h-6 w-6 text-cyber-green sm:h-8 sm:w-8" />
           </div>
-          <div>
-            <h1 className="text-glow text-2xl font-bold tracking-wider text-cyber-green">SENTINEL VAULT</h1>
-            <p className="text-sm text-cyber-green/60">DEVNET // PROTOCOL v0.1.0</p>
+          <div className="min-w-0">
+            <h1 className="text-glow truncate text-lg font-bold tracking-wider text-cyber-green sm:text-2xl">SENTINEL VAULT</h1>
+            <p className="text-xs text-cyber-green/60 sm:text-sm">DEVNET // v0.1.0</p>
           </div>
         </div>
-        <WalletButton />
+        <div className="flex-shrink-0 self-end sm:self-auto">
+          <WalletButton />
+        </div>
       </header>
 
       {status && <Toast type={status.type} message={status.message} />}

@@ -99,6 +99,26 @@ body {
 .wallet-adapter-modal-list li { @apply border-b border-cyber-purple/20 !important; }
 .wallet-adapter-modal-list-more { @apply text-cyber-purple !important; }
 
+/* Mobile wallet button responsiveness */
+@media (max-width: 640px) {
+  .wallet-adapter-button {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.7rem !important;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .wallet-adapter-button-trigger {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.7rem !important;
+  }
+  .wallet-adapter-button i,
+  .wallet-adapter-button-start-icon {
+    display: none !important;
+  }
+}
+
 @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
 .cursor-blink::after { content: "_"; animation: blink 1s step-end infinite; }
 .hex-badge { clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
