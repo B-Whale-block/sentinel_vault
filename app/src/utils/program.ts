@@ -4,9 +4,9 @@ import { TOKEN_PROGRAM_ID, getAssociatedTokenAddress, getAccount } from "@solana
 import { AnchorWallet } from "@solana/wallet-adapter-react";
 import IDL from "../idl/sentinel_vault.json";
 
-export const PROGRAM_ID = new PublicKey("ERjqtieYDomjRpxswqWm5tmZT3LbazL3Zoy42xPdHdBY");
+export const PROGRAM_ID = new PublicKey("FqtRBu34yQx6dSi1xKjZSMsuGvzEpviGjeu65xKYVdmW");
 export const RPC_ENDPOINT = "https://api.devnet.solana.com";
-export const TOKEN_MINT = new PublicKey("11111111111111111111111111111111"); // TODO: Set actual mint
+export const TOKEN_MINT = new PublicKey("3jbeJgMDBWz1zbDhqvpBwAu9CLD9o5FjWACZ6LRcq1n3");
 
 const SEEDS = {
   config: "sentinel_config",
@@ -48,7 +48,7 @@ export async function initialize(
   const [sentinelConfig] = pda.config();
 
   return program.methods
-    .initialize()
+    .initialize(oldTokenMint)
     .accounts({
       admin,
       sentinelConfig,

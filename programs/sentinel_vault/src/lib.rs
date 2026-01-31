@@ -1,8 +1,9 @@
 use anchor_lang::prelude::*;
+use anchor_lang::prelude::borsh;
 use anchor_spl::token::{self, Token, TokenAccount, Transfer};
 use anchor_lang::solana_program::clock::Clock;
 
-declare_id!("ERjqtieYDomjRpxswqWm5tmZT3LbazL3Zoy42xPdHdBY");
+declare_id!("FqtRBu34yQx6dSi1xKjZSMsuGvzEpviGjeu65xKYVdmW");
 
 #[program]
 pub mod sentinel_vault {
@@ -73,16 +74,7 @@ pub mod sentinel_vault {
             SentinelError::DepositAmountTooSmall
         );
 
-        // Check 3: Validate token mint matches
-        require!(
-            ctx.accounts.user_old_token_account.mint == sentinel_config.old_token_mint,
-            SentinelError::InvalidTokenMint
-        );
-
-        require!(
-            ctx.accounts.vault_old_token_account.mint == sentinel_config.old_token_mint,
-            SentinelError::InvalidTokenMint
-        );
+        // Note: Token mint validation now handled by account constraints
 
         // ============================================================================
         // Transfer Old Tokens from User to Vault (CPI)
@@ -270,16 +262,7 @@ pub mod sentinel_vault {
             SentinelError::Unauthorized
         );
 
-        // Check 5: Validate token mint matches
-        require!(
-            ctx.accounts.user_old_token_account.mint == sentinel_config.old_token_mint,
-            SentinelError::InvalidTokenMint
-        );
-
-        require!(
-            ctx.accounts.vault_old_token_account.mint == sentinel_config.old_token_mint,
-            SentinelError::InvalidTokenMint
-        );
+        // Note: Token mint validation now handled by account constraints
 
         msg!("User {} withdrawing {} old tokens", ctx.accounts.user.key(), amount);
         msg!("User deposited before withdraw: {}", user_vault.old_token_deposited);
@@ -523,10 +506,16 @@ pub struct Deposit<'info> {
     #[account(mut)]
     pub sentinel_config: Account<'info, SentinelConfig>,
 
-    #[account(mut)]
+    #[account(
+        mut,
+        constraint = user_old_token_account.mint == sentinel_config.old_token_mint @ SentinelError::InvalidTokenMint
+    )]
     pub user_old_token_account: Account<'info, TokenAccount>,
 
-    #[account(mut)]
+    #[account(
+        mut,
+        constraint = vault_old_token_account.mint == sentinel_config.old_token_mint @ SentinelError::InvalidTokenMint
+    )]
     pub vault_old_token_account: Account<'info, TokenAccount>,
 
     pub token_program: Program<'info, Token>,
@@ -589,10 +578,16 @@ pub struct Withdraw<'info> {
     )]
     pub vault_authority: AccountInfo<'info>,
 
-    #[account(mut)]
+    #[account(
+        mut,
+        constraint = vault_old_token_account.mint == sentinel_config.old_token_mint @ SentinelError::InvalidTokenMint
+    )]
     pub vault_old_token_account: Account<'info, TokenAccount>,
 
-    #[account(mut)]
+    #[account(
+        mut,
+        constraint = user_old_token_account.mint == sentinel_config.old_token_mint @ SentinelError::InvalidTokenMint
+    )]
     pub user_old_token_account: Account<'info, TokenAccount>,
 
     pub token_program: Program<'info, Token>,
