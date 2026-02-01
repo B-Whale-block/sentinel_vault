@@ -95,7 +95,7 @@ export default function Dashboard() {
                 maxBalance={walletBalance}
               />
               <ActionCard
-                title="Emergency Exit"
+                title="Withdraw Tokens"
                 icon={<UpArrowIcon className="h-6 w-6" />}
                 variant="red"
                 value={withdrawInput}
