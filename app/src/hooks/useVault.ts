@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { PublicKey } from "@solana/web3.js";
+// FIX: Added SystemProgram to the imports below
+import { PublicKey, SystemProgram } from "@solana/web3.js";
 import {
   createProvider,
   createProgram,
@@ -17,7 +18,6 @@ import {
   TOKEN_MINT,
 } from "../utils/program";
 
-// 1. FIX: Define the status type separately so we can use it easily
 type StatusType = "success" | "error" | "info";
 type TxStatus = { type: StatusType; message: string } | null;
 
@@ -31,7 +31,6 @@ export function useVault() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<TxStatus>(null);
 
-  // 2. FIX: Use the specific "StatusType" here
   const showStatus = useCallback((type: StatusType, message: string) => {
     setStatus({ type, message });
     setTimeout(() => setStatus(null), 5000);
@@ -105,6 +104,7 @@ export function useVault() {
       return false;
     }
 
+    // We pass SystemProgram.programId as a dummy address for the 2nd argument
     return execTx(
       () => program.methods
         .initialize(mint, SystemProgram.programId) 
@@ -132,7 +132,6 @@ export function useVault() {
       return false;
     }
 
-    // Pass the vault token account (PDA) if needed, or let program resolve it
     const vaultTokenAccount = await getVaultTokenAccount(TOKEN_MINT);
 
     return execTx(
