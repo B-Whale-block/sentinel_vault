@@ -5,42 +5,9 @@
       <stop offset="50%" style="stop-color:#0099ff"/>
       <stop offset="100%" style="stop-color:#003d99"/>
     </linearGradient>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
   </defs>
-
-  <!-- Dark blue background with rounded corners -->
-  <rect x="0" y="0" width="512" height="512" rx="64" ry="64" fill="#000510"/>
-
-  <g transform="translate(128, 80)">
-    <!-- Padlock shackle -->
-    <path
-      d="M 48 160 L 48 96 C 48 43 91 0 144 0 C 197 0 240 43 240 96 L 240 160"
-      fill="none"
-      stroke="url(#shieldGradient)"
-      stroke-width="28"
-      stroke-linecap="round"
-      filter="url(#glow)"
-    />
-    <!-- Padlock body -->
-    <rect
-      x="16"
-      y="144"
-      width="224"
-      height="176"
-      rx="24"
-      ry="24"
-      fill="url(#shieldGradient)"
-      filter="url(#glow)"
-    />
-    <!-- Keyhole circle -->
-    <circle cx="128" cy="220" r="28" fill="#000510"/>
-    <!-- Keyhole slot -->
-    <rect x="116" y="220" width="24" height="56" rx="8" fill="#000510"/>
-  </g>
+  <path
+    fill="url(#shieldGradient)"
+    d="M256 48c-58.7 32.4-125.3 48-192 48v160c0 97.2 75.3 182.4 192 224 116.7-41.6 192-126.8 192-224V96c-66.7 0-133.3-15.6-192-48zm-32 272l-64-64 32-32 32 32 96-96 32 32-128 128z"
+  />
 </svg>
