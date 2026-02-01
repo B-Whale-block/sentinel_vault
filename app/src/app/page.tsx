@@ -166,7 +166,7 @@ export default function Dashboard() {
       </main>
 
       <footer className="mx-auto mt-16 max-w-6xl text-center">
-        <p className="text-xs font-mono text-gray-600 opacity-50">SVALINN_VAULT // SECURE_TOKEN_PROTOCOL // 2026</p>
+        <p className="text-xs font-mono text-slate-400">SVALINN_VAULT // SECURE_TOKEN_PROTOCOL // 2026</p>
       </footer>
     </div>
   );
