@@ -5,23 +5,30 @@ import "./globals.css";
 
 const font = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
+/*
+ * Social Preview Image:
+ * Place a file named `opengraph-image.png` (1200x630px) in the `app/` directory
+ * for the social preview to work automatically on Telegram/Twitter/etc.
+ * Next.js will automatically detect and use it for OpenGraph meta tags.
+ */
+
 export const metadata: Metadata = {
-  title: "Svalinn Protocol",
-  description: "The shield against the burn. Secure Token Migration & Storage on Solana.",
+  title: "Svalinn Vault | Secure Migration",
+  description: "The shield against the burn. Secure Token Storage & Migration Protocol.",
   keywords: ["Solana", "DeFi", "Token Migration", "Vault", "Crypto", "Web3", "Svalinn"],
-  authors: [{ name: "Svalinn Protocol" }],
+  authors: [{ name: "Svalinn Vault" }],
   openGraph: {
-    title: "Svalinn Protocol",
-    description: "The shield against the burn. Secure Token Migration & Storage on Solana.",
-    url: "https://sentinel-vault.vercel.app",
-    siteName: "Svalinn Protocol",
+    title: "Svalinn Vault",
+    description: "The shield against the burn. Secure Token Storage & Migration Protocol.",
+    url: "https://svalinn.app",
+    siteName: "Svalinn Vault",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Svalinn Protocol",
-    description: "The shield against the burn. Secure Token Migration & Storage on Solana.",
+    title: "Svalinn Vault",
+    description: "The shield against the burn. Secure Token Storage & Migration Protocol.",
   },
   icons: {
     icon: "/icon.svg",

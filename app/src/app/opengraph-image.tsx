@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
-export const alt = "Svalinn Protocol - The Shield Against The Burn";
+export const alt = "Svalinn Vault - The Shield Against The Burn";
 export const size = {
   width: 1200,
   height: 630,
@@ -71,15 +71,15 @@ export default async function Image() {
         >
           <span
             style={{
-              fontSize: "64px",
+              fontSize: "56px",
               fontWeight: 900,
-              letterSpacing: "0.2em",
+              letterSpacing: "0.15em",
               background: "linear-gradient(135deg, #00f5ff 0%, #0099ff 50%, #003d99 100%)",
               backgroundClip: "text",
               color: "transparent",
             }}
           >
-            SVALINN
+            SVALINN VAULT
           </span>
           <span
             style={{

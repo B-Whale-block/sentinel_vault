@@ -47,7 +47,7 @@
   </g>
 
   <!-- Title -->
-  <text x="600" y="500" text-anchor="middle" font-family="system-ui, sans-serif" font-size="72" font-weight="900" letter-spacing="0.15em" fill="url(#shieldGradient)" filter="url(#glow)">SVALINN</text>
+  <text x="600" y="500" text-anchor="middle" font-family="system-ui, sans-serif" font-size="60" font-weight="900" letter-spacing="0.12em" fill="url(#shieldGradient)" filter="url(#glow)">SVALINN VAULT</text>
 
   <!-- Subtitle -->
   <text x="600" y="560" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" font-style="italic" fill="#6b7280">The shield against the burn</text>

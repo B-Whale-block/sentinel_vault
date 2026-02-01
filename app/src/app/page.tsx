@@ -42,7 +42,7 @@ export default function Dashboard() {
             <LockIcon className="relative z-10 h-6 w-6 text-cyan-400 sm:h-8 sm:w-8" />
           </div>
           <div className="min-w-0">
-            <h1 className="text-svalinn-gradient truncate text-xl font-black tracking-widest sm:text-3xl">SVALINN</h1>
+            <h1 className="text-svalinn-gradient truncate text-xl font-black tracking-widest sm:text-3xl">SVALINN VAULT</h1>
             <p className="mt-1 text-xs italic text-slate-400 sm:text-sm">"If Svalinn were to fall, the mountains and sea would burn up."</p>
           </div>
         </div>
@@ -166,7 +166,7 @@ export default function Dashboard() {
       </main>
 
       <footer className="mx-auto mt-16 max-w-6xl text-center">
-        <p className="text-xs text-slate-500">SVALINN_PROTOCOL // THE_SHIELD_AGAINST_THE_BURN // 2026</p>
+        <p className="text-xs font-mono text-gray-600 opacity-50">SVALINN_VAULT // SECURE_TOKEN_PROTOCOL // 2026</p>
       </footer>
     </div>
   );
