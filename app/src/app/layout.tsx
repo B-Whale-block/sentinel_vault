@@ -13,7 +13,7 @@ const font = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", displ
  */
 
 export const metadata: Metadata = {
-  title: "Svalinn Vault",
+  title: "// Svalinn Vault",
   description: "The shield against the burn.",
   keywords: ["Solana", "DeFi", "Token Migration", "Vault", "Crypto", "Web3", "Svalinn"],
   authors: [{ name: "Svalinn Vault" }],
