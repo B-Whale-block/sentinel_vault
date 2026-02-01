@@ -211,12 +211,12 @@ body {
   background: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(34, 211, 238, 0.02) 40%,
-    rgba(34, 211, 238, 0.04) 50%,
-    rgba(34, 211, 238, 0.02) 60%,
+    rgba(34, 211, 238, 0.04) 40%,
+    rgba(34, 211, 238, 0.08) 50%,
+    rgba(34, 211, 238, 0.04) 60%,
     transparent 100%
   );
-  animation: scanner-sweep 10s linear infinite;
+  animation: scanner-sweep 7s linear infinite;
   pointer-events: none;
   z-index: 50;
 }
