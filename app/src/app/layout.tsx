@@ -32,12 +32,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`dark ${font.variable}`}>
-      <body className="bg-cyber-darker min-h-screen font-mono antialiased">
+      <body className="min-h-screen bg-slate-950 font-mono antialiased">
         <Providers>
-          <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden opacity-[0.03]">
-            <div className="animate-scan absolute inset-0 bg-gradient-to-b from-transparent via-cyber-green to-transparent" />
-          </div>
-          <div className="fixed inset-0 bg-[linear-gradient(rgba(0,255,65,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,65,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+          {/* Scanner Beam - Cyan sweep effect */}
+          <div className="scanner-beam" />
+          {/* Cryo Grid Background */}
+          <div className="fixed inset-0 bg-[linear-gradient(to_right,rgba(8,51,68,0.4)_1px,transparent_1px),linear-gradient(to_bottom,rgba(8,51,68,0.4)_1px,transparent_1px)] bg-[size:50px_50px]" />
+          {/* Content */}
           <div className="relative z-10">{children}</div>
         </Providers>
       </body>

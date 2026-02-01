@@ -38,12 +38,12 @@ export default function Dashboard() {
       <header className="mx-auto mb-8 flex max-w-6xl flex-col gap-4 sm:mb-12 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-3 sm:gap-4">
           <div className="relative flex h-10 w-10 flex-shrink-0 items-center justify-center sm:h-12 sm:w-12">
-            <div className="absolute inset-0 animate-pulse rounded-lg bg-cyber-green/20" />
-            <LockIcon className="relative z-10 h-6 w-6 text-cyber-green sm:h-8 sm:w-8" />
+            <div className="absolute inset-0 animate-pulse rounded-lg bg-cyan-400/20" />
+            <LockIcon className="relative z-10 h-6 w-6 text-cyan-400 sm:h-8 sm:w-8" />
           </div>
           <div className="min-w-0">
             <h1 className="text-svalinn-gradient truncate text-xl font-black tracking-widest sm:text-3xl">SVALINN</h1>
-            <p className="mt-1 text-xs italic text-gray-400 sm:text-sm">"If Svalinn were to fall, the mountains and sea would burn up."</p>
+            <p className="mt-1 text-xs italic text-slate-400 sm:text-sm">"If Svalinn were to fall, the mountains and sea would burn up."</p>
           </div>
         </div>
         <div className="flex-shrink-0 self-end sm:self-auto">
@@ -55,10 +55,10 @@ export default function Dashboard() {
 
       <main className="mx-auto max-w-6xl space-y-8">
         {!connected && (
-          <div className="cyber-card cyber-card-purple text-center">
+          <div className="cryo-card cryo-card-purple text-center">
             <div className="flex items-center justify-center gap-3">
-              <div className="status-dot status-dot-red" />
-              <p className="text-cyber-purple">WALLET_NOT_CONNECTED // PLEASE AUTHENTICATE</p>
+              <div className="status-dot status-dot-rose" />
+              <p className="text-purple-400">WALLET_NOT_CONNECTED // PLEASE AUTHENTICATE</p>
             </div>
           </div>
         )}
@@ -69,8 +69,8 @@ export default function Dashboard() {
               <BalanceCard
                 label="Vault Balance"
                 value={vaultBalance}
-                status="ACTIVE"
-                variant="green"
+                status="SHIELDED"
+                variant="cyan"
                 sublabel="PROTECTED_BY_SVALINN"
               />
               <BalanceCard
@@ -86,40 +86,40 @@ export default function Dashboard() {
               <ActionCard
                 title="Deposit Tokens"
                 icon={<DownArrowIcon className="h-6 w-6" />}
-                variant="green"
+                variant="cyan"
                 value={depositInput}
                 onChange={setDepositInput}
                 onSubmit={onDeposit}
                 loading={loading}
-                buttonText="EXECUTE_DEPOSIT"
+                buttonText="SHIELD_TOKENS"
                 maxBalance={walletBalance}
               />
               <ActionCard
                 title="Withdraw Tokens"
                 icon={<UpArrowIcon className="h-6 w-6" />}
-                variant="red"
+                variant="burn"
                 value={withdrawInput}
                 onChange={setWithdrawInput}
                 onSubmit={onWithdraw}
                 loading={loading}
-                buttonText="EXECUTE_WITHDRAW"
+                buttonText="RELEASE_TOKENS"
                 maxBalance={vaultBalance}
               />
             </div>
 
-            <div className="cyber-card border-cyber-yellow/30">
+            <div className="cryo-card cryo-card-amber">
               <button onClick={() => setShowAdmin(!showAdmin)} className="flex w-full items-center justify-between">
-                <h2 className="flex items-center gap-3 text-sm font-bold uppercase tracking-wider text-cyber-yellow">
+                <h2 className="flex items-center gap-3 text-sm font-bold uppercase tracking-wider text-amber-400">
                   <SettingsIcon className="h-5 w-5" />
                   Admin Controls
                 </h2>
-                <ChevronIcon className={`h-5 w-5 text-cyber-yellow transition-transform ${showAdmin ? "rotate-180" : ""}`} />
+                <ChevronIcon className={`h-5 w-5 text-amber-400 transition-transform ${showAdmin ? "rotate-180" : ""}`} />
               </button>
 
               {showAdmin && (
-                <div className="mt-6 space-y-4 border-t border-cyber-yellow/20 pt-6">
+                <div className="mt-6 space-y-4 border-t border-amber-400/20 pt-6">
                   <div>
-                    <label className="mb-2 block text-xs uppercase tracking-wider text-cyber-yellow/60">
+                    <label className="mb-2 block text-xs uppercase tracking-wider text-amber-400/60">
                       Token Mint Address
                     </label>
                     <input
@@ -127,35 +127,35 @@ export default function Dashboard() {
                       value={mintInput}
                       onChange={(e) => setMintInput(e.target.value)}
                       placeholder="Mint public key..."
-                      className="cyber-input border-cyber-yellow/30 text-cyber-yellow placeholder-cyber-yellow/40 focus:border-cyber-yellow"
+                      className="cryo-input border-amber-400/30 text-amber-400 placeholder-amber-400/40 focus:border-amber-400"
                       disabled={loading}
                     />
                   </div>
                   <button
                     onClick={() => handleInitialize(mintInput)}
                     disabled={loading}
-                    className="cyber-btn w-full border-cyber-yellow/50 bg-cyber-yellow/10 text-cyber-yellow hover:border-cyber-yellow hover:bg-cyber-yellow/20"
+                    className="cryo-btn w-full border-amber-400/50 bg-amber-400/10 text-amber-400 hover:border-amber-400 hover:bg-amber-400/20"
                   >
-                    {loading ? <Spinner color="yellow" text="Activating..." /> : "ACTIVATE_SVALINN"}
+                    {loading ? <Spinner color="amber" text="Activating..." /> : "ACTIVATE_SVALINN"}
                   </button>
-                  <p className="text-center text-xs text-cyber-yellow/40">WARNING: ADMIN_ONLY // ONE_TIME_INITIALIZATION</p>
+                  <p className="text-center text-xs text-amber-400/40">WARNING: ADMIN_ONLY // ONE_TIME_INITIALIZATION</p>
                 </div>
               )}
             </div>
 
-            <div className="cyber-card opacity-60">
+            <div className="cryo-card opacity-60">
               <div className="flex flex-wrap items-center justify-between gap-4 text-xs">
                 <div>
-                  <span className="text-cyber-green/40">PROGRAM_ID: </span>
-                  <span className="text-cyber-green">{PROGRAM_ID.toBase58().slice(0, 16)}...</span>
+                  <span className="text-cyan-400/40">PROGRAM_ID: </span>
+                  <span className="text-cyan-400">{PROGRAM_ID.toBase58().slice(0, 16)}...</span>
                 </div>
                 <div>
-                  <span className="text-cyber-green/40">NETWORK: </span>
-                  <span className="text-cyber-green">DEVNET</span>
+                  <span className="text-cyan-400/40">NETWORK: </span>
+                  <span className="text-cyan-400">DEVNET</span>
                 </div>
                 <div>
-                  <span className="text-cyber-green/40">WALLET: </span>
-                  <span className="text-cyber-green">
+                  <span className="text-cyan-400/40">WALLET: </span>
+                  <span className="text-cyan-400">
                     {publicKey?.toBase58().slice(0, 8)}...{publicKey?.toBase58().slice(-8)}
                   </span>
                 </div>
@@ -166,7 +166,7 @@ export default function Dashboard() {
       </main>
 
       <footer className="mx-auto mt-16 max-w-6xl text-center">
-        <p className="text-xs text-gray-500">SVALINN_PROTOCOL // THE_SHIELD_AGAINST_THE_BURN // 2026</p>
+        <p className="text-xs text-slate-500">SVALINN_PROTOCOL // THE_SHIELD_AGAINST_THE_BURN // 2026</p>
       </footer>
     </div>
   );
@@ -182,31 +182,31 @@ function BalanceCard({
   label: string;
   value: string;
   status: string;
-  variant: "green" | "purple";
+  variant: "cyan" | "purple";
   sublabel: string;
 }) {
-  const isGreen = variant === "green";
+  const isCyan = variant === "cyan";
   return (
-    <div className={`cyber-card ${isGreen ? "" : "cyber-card-purple"}`}>
+    <div className={`cryo-card ${isCyan ? "" : "cryo-card-purple"}`}>
       <div className="mb-4 flex items-center justify-between">
-        <span className={`text-sm uppercase tracking-wider ${isGreen ? "text-cyber-green/60" : "text-cyber-purple/60"}`}>
+        <span className={`text-sm uppercase tracking-wider ${isCyan ? "text-cyan-400/60" : "text-purple-400/60"}`}>
           {label}
         </span>
         <div className="flex items-center gap-2">
           <div
-            className={`status-dot ${isGreen ? "status-dot-green" : "bg-cyber-purple"}`}
-            style={isGreen ? undefined : { boxShadow: "0 0 10px var(--cyber-purple)" }}
+            className={`status-dot ${isCyan ? "status-dot-cyan" : "bg-purple-400"}`}
+            style={isCyan ? undefined : { boxShadow: "0 0 10px rgb(168, 85, 247)" }}
           />
-          <span className={`text-xs ${isGreen ? "text-cyber-green/60" : "text-cyber-purple/60"}`}>{status}</span>
+          <span className={`text-xs ${isCyan ? "text-cyan-400/60" : "text-purple-400/60"}`}>{status}</span>
         </div>
       </div>
       <div className="flex items-baseline gap-2">
-        <span className={`text-4xl font-bold ${isGreen ? "text-glow text-cyber-green" : "text-glow-purple text-cyber-purple"}`}>
+        <span className={`text-4xl font-bold ${isCyan ? "text-cyan-400 ice-glow" : "text-purple-400 text-glow-purple"}`}>
           {value}
         </span>
-        <span className={isGreen ? "text-cyber-green/60" : "text-cyber-purple/60"}>TOKENS</span>
+        <span className={isCyan ? "text-cyan-400/60" : "text-purple-400/60"}>TOKENS</span>
       </div>
-      <p className={`mt-2 text-xs ${isGreen ? "text-cyber-green/40" : "text-cyber-purple/40"}`}>{sublabel}</p>
+      <p className={`mt-2 text-xs ${isCyan ? "text-cyan-400/40" : "text-purple-400/40"}`}>{sublabel}</p>
     </div>
   );
 }
@@ -224,7 +224,7 @@ function ActionCard({
 }: {
   title: string;
   icon: React.ReactNode;
-  variant: "green" | "red";
+  variant: "cyan" | "burn";
   value: string;
   onChange: (v: string) => void;
   onSubmit: () => void;
@@ -232,7 +232,7 @@ function ActionCard({
   buttonText: string;
   maxBalance: string;
 }) {
-  const isRed = variant === "red";
+  const isBurn = variant === "burn";
 
   // Parse the balance string (handles comma formatting)
   const parseBalance = (bal: string) => {
@@ -256,18 +256,18 @@ function ActionCard({
   ];
 
   return (
-    <div className={`cyber-card ${isRed ? "cyber-card-red" : ""}`}>
-      <h2 className={`mb-6 flex items-center gap-3 text-xl font-bold uppercase tracking-wider ${isRed ? "text-cyber-red" : "text-cyber-green"}`}>
+    <div className={`cryo-card ${isBurn ? "cryo-card-burn" : ""}`}>
+      <h2 className={`mb-6 flex items-center gap-3 text-xl font-bold uppercase tracking-wider ${isBurn ? "text-rose-400" : "text-cyan-400"}`}>
         {icon}
         {title}
       </h2>
       <div className="space-y-4">
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <label className={`text-xs uppercase tracking-wider ${isRed ? "text-cyber-red/60" : "text-cyber-green/60"}`}>
+            <label className={`text-xs uppercase tracking-wider ${isBurn ? "text-rose-400/60" : "text-cyan-400/60"}`}>
               Amount
             </label>
-            <span className={`text-xs ${isRed ? "text-cyber-red/40" : "text-cyber-green/40"}`}>
+            <span className={`text-xs ${isBurn ? "text-rose-400/40" : "text-cyan-400/40"}`}>
               Available: {maxBalance}
             </span>
           </div>
@@ -276,7 +276,7 @@ function ActionCard({
             value={value}
             onChange={(e) => onChange(e.target.value)}
             placeholder="0.00"
-            className={`cyber-input ${isRed ? "cyber-input-red" : ""}`}
+            className={`cryo-input ${isBurn ? "cryo-input-burn" : ""}`}
             disabled={loading}
           />
         </div>
@@ -287,33 +287,33 @@ function ActionCard({
               onClick={() => setPercentage(btn.value)}
               disabled={loading || parseBalance(maxBalance) === 0}
               className={`flex-1 rounded border px-2 py-1.5 text-xs font-semibold uppercase transition-all ${
-                isRed
-                  ? "border-cyber-red/30 text-cyber-red/70 hover:border-cyber-red hover:bg-cyber-red/10 disabled:opacity-30"
-                  : "border-cyber-green/30 text-cyber-green/70 hover:border-cyber-green hover:bg-cyber-green/10 disabled:opacity-30"
+                isBurn
+                  ? "border-rose-400/30 text-rose-400/70 hover:border-rose-400 hover:bg-rose-400/10 disabled:opacity-30"
+                  : "border-cyan-400/30 text-cyan-400/70 hover:border-cyan-400 hover:bg-cyan-400/10 disabled:opacity-30"
               }`}
             >
               {btn.label}
             </button>
           ))}
         </div>
-        <button onClick={onSubmit} disabled={loading || !value} className={`cyber-btn w-full ${isRed ? "cyber-btn-red" : ""}`}>
-          {loading ? <Spinner color={variant} text="Processing..." /> : buttonText}
+        <button onClick={onSubmit} disabled={loading || !value} className={`cryo-btn w-full ${isBurn ? "cryo-btn-burn" : ""}`}>
+          {loading ? <Spinner color={isBurn ? "burn" : "cyan"} text="Processing..." /> : buttonText}
         </button>
       </div>
     </div>
   );
 }
 
-function Spinner({ color, text }: { color: "green" | "red" | "yellow"; text: string }) {
-  const borderClass = {
-    green: "",
-    red: "border-cyber-red/30 border-t-cyber-red",
-    yellow: "border-cyber-yellow/30 border-t-cyber-yellow",
+function Spinner({ color, text }: { color: "cyan" | "burn" | "amber"; text: string }) {
+  const spinnerClass = {
+    cyan: "cryo-spinner",
+    burn: "cryo-spinner-burn",
+    amber: "cryo-spinner border-amber-400/30 border-t-amber-400",
   }[color];
 
   return (
     <span className="flex items-center justify-center gap-2">
-      <div className={`cyber-spinner ${borderClass}`} />
+      <div className={spinnerClass} />
       {text}
     </span>
   );
