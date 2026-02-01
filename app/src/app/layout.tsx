@@ -32,6 +32,11 @@ export const metadata: Metadata = {
     description: "The shield against the burn.",
     images: ["/opengraph-image.png"],
   },
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
