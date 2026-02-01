@@ -42,7 +42,7 @@ export default function Dashboard() {
             <LockIcon className="relative z-10 h-6 w-6 text-cyan-400 sm:h-8 sm:w-8" />
           </div>
           <div className="min-w-0">
-            <h1 className="text-svalinn-gradient truncate text-xl font-black tracking-widest sm:text-3xl">SVALINN VAULT</h1>
+            <h1 className="text-svalinn-gradient truncate text-xl font-black tracking-widest sm:text-3xl">SVALINN</h1>
             <p className="mt-1 text-xs italic text-slate-400 sm:text-sm">"If Svalinn were to fall, the mountains and sea would burn up."</p>
           </div>
         </div>
