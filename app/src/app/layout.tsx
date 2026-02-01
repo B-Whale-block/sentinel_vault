@@ -6,22 +6,22 @@ import "./globals.css";
 const font = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Sentinel Vault | Dashboard",
-  description: "Secure token migration protocol on Solana. Trustless liquidity migration with proportional token distribution.",
-  keywords: ["Solana", "DeFi", "Token Migration", "Vault", "Crypto", "Web3"],
-  authors: [{ name: "Sentinel Vault" }],
+  title: "Svalinn Protocol",
+  description: "The shield against the burn. Secure Token Migration & Storage on Solana.",
+  keywords: ["Solana", "DeFi", "Token Migration", "Vault", "Crypto", "Web3", "Svalinn"],
+  authors: [{ name: "Svalinn Protocol" }],
   openGraph: {
-    title: "Sentinel Vault",
-    description: "Secure token migration protocol on Solana. Trustless liquidity migration with proportional token distribution.",
+    title: "Svalinn Protocol",
+    description: "The shield against the burn. Secure Token Migration & Storage on Solana.",
     url: "https://sentinel-vault.vercel.app",
-    siteName: "Sentinel Vault",
+    siteName: "Svalinn Protocol",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sentinel Vault",
-    description: "Secure token migration protocol on Solana. Trustless liquidity migration with proportional token distribution.",
+    title: "Svalinn Protocol",
+    description: "The shield against the burn. Secure Token Migration & Storage on Solana.",
   },
   icons: {
     icon: "/icon.svg",

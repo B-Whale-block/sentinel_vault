@@ -42,8 +42,8 @@ export default function Dashboard() {
             <LockIcon className="relative z-10 h-6 w-6 text-cyber-green sm:h-8 sm:w-8" />
           </div>
           <div className="min-w-0">
-            <h1 className="text-glow truncate text-lg font-bold tracking-wider text-cyber-green sm:text-2xl">SENTINEL VAULT</h1>
-            <p className="text-xs text-cyber-green/60 sm:text-sm">DEVNET // v0.1.0</p>
+            <h1 className="text-svalinn-gradient truncate text-xl font-black tracking-widest sm:text-3xl">SVALINN</h1>
+            <p className="mt-1 text-xs italic text-gray-400 sm:text-sm">"If Svalinn were to fall, the mountains and sea would burn up."</p>
           </div>
         </div>
         <div className="flex-shrink-0 self-end sm:self-auto">
@@ -71,7 +71,7 @@ export default function Dashboard() {
                 value={vaultBalance}
                 status="ACTIVE"
                 variant="green"
-                sublabel="DEPOSITED_IN_SENTINEL_VAULT"
+                sublabel="PROTECTED_BY_SVALINN"
               />
               <BalanceCard
                 label="Wallet Balance"
@@ -136,7 +136,7 @@ export default function Dashboard() {
                     disabled={loading}
                     className="cyber-btn w-full border-cyber-yellow/50 bg-cyber-yellow/10 text-cyber-yellow hover:border-cyber-yellow hover:bg-cyber-yellow/20"
                   >
-                    {loading ? <Spinner color="yellow" text="Initializing..." /> : "INITIALIZE_VAULT"}
+                    {loading ? <Spinner color="yellow" text="Activating..." /> : "ACTIVATE_SVALINN"}
                   </button>
                   <p className="text-center text-xs text-cyber-yellow/40">WARNING: ADMIN_ONLY // ONE_TIME_INITIALIZATION</p>
                 </div>
@@ -166,7 +166,7 @@ export default function Dashboard() {
       </main>
 
       <footer className="mx-auto mt-16 max-w-6xl text-center">
-        <p className="text-xs text-cyber-green/30">SENTINEL_VAULT // SECURE_TOKEN_PROTOCOL // 2026</p>
+        <p className="text-xs text-gray-500">SVALINN_PROTOCOL // THE_SHIELD_AGAINST_THE_BURN // 2026</p>
       </footer>
     </div>
   );

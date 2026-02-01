@@ -28,6 +28,15 @@ body {
 .text-glow-blue { text-shadow: 0 0 10px var(--cyber-blue), 0 0 20px var(--cyber-blue), 0 0 30px var(--cyber-blue); }
 .text-glow-red { text-shadow: 0 0 10px var(--cyber-red), 0 0 20px var(--cyber-red); }
 
+/* Svalinn gradient text - Ice/Cyan to Deep Blue */
+.text-svalinn-gradient {
+  background: linear-gradient(135deg, #00f5ff 0%, #00d4ff 25%, #0099ff 50%, #0066cc 75%, #003d99 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.5)) drop-shadow(0 0 20px rgba(0, 102, 204, 0.3));
+}
+
 .cyber-card {
   @apply relative overflow-hidden rounded-lg border border-cyber-green/30 bg-cyber-dark/80 p-6 backdrop-blur-sm;
   box-shadow: 0 0 20px rgba(0, 255, 65, 0.1), inset 0 0 20px rgba(0, 255, 65, 0.05);

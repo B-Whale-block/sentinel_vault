@@ -1,10 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
-  <!-- Dark background -->
-  <rect x="0" y="0" width="1200" height="630" fill="#000000"/>
-
   <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000510"/>
+      <stop offset="50%" style="stop-color:#001025"/>
+      <stop offset="100%" style="stop-color:#000510"/>
+    </linearGradient>
+    <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00f5ff"/>
+      <stop offset="50%" style="stop-color:#0099ff"/>
+      <stop offset="100%" style="stop-color:#003d99"/>
+    </linearGradient>
     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
       <feMerge>
         <feMergeNode in="coloredBlur"/>
         <feMergeNode in="SourceGraphic"/>
@@ -12,18 +19,19 @@
     </filter>
   </defs>
 
-  <!-- Padlock icon - large and centered -->
-  <g transform="translate(440, 35) scale(1.4)">
-    <!-- Padlock shackle -->
+  <!-- Background -->
+  <rect x="0" y="0" width="1200" height="630" fill="url(#bgGradient)"/>
+
+  <!-- Padlock icon -->
+  <g transform="translate(440, 40) scale(1.2)">
     <path
       d="M 48 160 L 48 96 C 48 43 91 0 144 0 C 197 0 240 43 240 96 L 240 160"
       fill="none"
-      stroke="#39FF14"
+      stroke="url(#shieldGradient)"
       stroke-width="28"
       stroke-linecap="round"
       filter="url(#glow)"
     />
-    <!-- Padlock body -->
     <rect
       x="16"
       y="144"
@@ -31,12 +39,16 @@
       height="176"
       rx="24"
       ry="24"
-      fill="#39FF14"
+      fill="url(#shieldGradient)"
       filter="url(#glow)"
     />
-    <!-- Keyhole circle -->
-    <circle cx="128" cy="220" r="28" fill="#000000"/>
-    <!-- Keyhole slot -->
-    <rect x="116" y="220" width="24" height="56" rx="8" fill="#000000"/>
+    <circle cx="128" cy="220" r="28" fill="#000510"/>
+    <rect x="116" y="220" width="24" height="56" rx="8" fill="#000510"/>
   </g>
+
+  <!-- Title -->
+  <text x="600" y="500" text-anchor="middle" font-family="system-ui, sans-serif" font-size="72" font-weight="900" letter-spacing="0.15em" fill="url(#shieldGradient)" filter="url(#glow)">SVALINN</text>
+
+  <!-- Subtitle -->
+  <text x="600" y="560" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" font-style="italic" fill="#6b7280">The shield against the burn</text>
 </svg>
