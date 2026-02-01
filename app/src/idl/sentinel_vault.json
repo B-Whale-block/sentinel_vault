@@ -12,7 +12,7 @@
         { "name": "systemProgram", "address": "11111111111111111111111111111111" }
       ],
       "args": [
-        { "name": "oldTokenMint", "type": "pubkey" }
+        { "name": "oldTokenMint", "type": "publicKey" }
       ]
     },
     {
