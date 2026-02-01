@@ -2,11 +2,10 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { PublicKey } from "@solana/web3.js";
+import { PublicKey, Transaction, TransactionInstruction, SystemProgram } from "@solana/web3.js";
 import {
   createProvider,
   createProgram,
-  initialize,
   deposit,
   withdraw,
   fetchUserVault,
@@ -90,23 +89,66 @@ export function useVault() {
     }
   };
 
+  // --- MANUAL INITIALIZE BYPASS (IGNORES IDL) ---
   const handleInitialize = async (mintAddress: string) => {
-    const program = getProgram();
-    if (!program || !publicKey) return false;
+    if (!publicKey || !wallet.signTransaction) return false;
 
-    let mint: PublicKey;
+    setLoading(true);
+    showStatus("info", "Initializing vault (Manual Mode)...");
+
     try {
-      mint = new PublicKey(mintAddress);
-    } catch {
-      showStatus("error", "Invalid mint address");
-      return false;
-    }
+      // 1. Setup Keys
+      const mint = new PublicKey(mintAddress);
+      const PROGRAM_ID = new PublicKey("FqtRBu34yQx6dSi1xKjZSMsuGvzEpviGjeu65xKYVdmW");
+      
+      const [sentinelConfig] = PublicKey.findProgramAddressSync(
+        [Buffer.from("sentinel_config")],
+        PROGRAM_ID
+      );
 
-    return execTx(
-      () => initialize(program, publicKey, mint),
-      "Initialized!",
-      "Initializing vault..."
-    );
+      // 2. Construct Data Manually
+      // Discriminator for "initialize": [175, 175, 109, 31, 13, 152, 155, 237]
+      const discriminator = Buffer.from([175, 175, 109, 31, 13, 152, 155, 237]);
+      
+      // Argument: oldTokenMint (32 bytes)
+      const data = Buffer.concat([discriminator, mint.toBuffer()]);
+
+      // 3. Build Instruction
+      const ix = new TransactionInstruction({
+        programId: PROGRAM_ID,
+        keys: [
+          { pubkey: publicKey, isSigner: true, isWritable: true },       // authority
+          { pubkey: sentinelConfig, isSigner: false, isWritable: true }, // sentinelConfig
+          { pubkey: SystemProgram.programId, isSigner: false, isWritable: false } // systemProgram
+        ],
+        data: data
+      });
+
+      // 4. Send Transaction directly via Wallet Adapter
+      const tx = new Transaction().add(ix);
+      
+      // Get latest blockhash
+      const { blockhash } = await connection.getLatestBlockhash();
+      tx.recentBlockhash = blockhash;
+      tx.feePayer = publicKey;
+
+      // Sign and Send
+      const signature = await wallet.sendTransaction(tx, connection);
+      
+      // Confirm
+      await connection.confirmTransaction(signature, "confirmed");
+
+      showStatus("success", `Initialized! TX: ${signature.slice(0, 8)}...`);
+      await refresh();
+      return true;
+
+    } catch (e: any) {
+      console.error("Manual Init Error:", e);
+      showStatus("error", `Failed: ${e.toString()}`);
+      return false;
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleDeposit = async (amount: string) => {
