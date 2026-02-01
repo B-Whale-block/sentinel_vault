@@ -1,15 +1,13 @@
 {
   "version": "0.1.0",
   "name": "sentinel_vault",
-  "address": "FqtRBu34yQx6dSi1xKjZSMsuGvzEpviGjeu65xKYVdmW",
   "instructions": [
     {
       "name": "initialize",
-      "discriminator": [175, 175, 109, 31, 13, 152, 155, 237],
       "accounts": [
-        { "name": "authority", "writable": true, "signer": true },
-        { "name": "sentinelConfig", "writable": true, "pda": { "seeds": [{ "kind": "const", "value": [115, 101, 110, 116, 105, 110, 101, 108, 95, 99, 111, 110, 102, 105, 103] }] } },
-        { "name": "systemProgram", "address": "11111111111111111111111111111111" }
+        { "name": "authority", "isMut": true, "isSigner": true },
+        { "name": "sentinelConfig", "isMut": true, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
       ],
       "args": [
         { "name": "oldTokenMint", "type": "publicKey" }
@@ -17,105 +15,43 @@
     },
     {
       "name": "deposit",
-      "discriminator": [242, 35, 198, 137, 82, 225, 242, 182],
       "accounts": [
-        { "name": "user", "writable": true, "signer": true },
-        { "name": "userVault", "writable": true, "pda": { "seeds": [{ "kind": "const", "value": [117, 115, 101, 114, 95, 118, 97, 117, 108, 116] }, { "kind": "account", "path": "user" }] } },
-        { "name": "sentinelConfig", "writable": true },
-        { "name": "userOldTokenAccount", "writable": true },
-        { "name": "vaultOldTokenAccount", "writable": true },
-        { "name": "tokenProgram", "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA" },
-        { "name": "systemProgram", "address": "11111111111111111111111111111111" }
+        { "name": "user", "isMut": true, "isSigner": true },
+        { "name": "userVault", "isMut": true, "isSigner": false },
+        { "name": "sentinelConfig", "isMut": true, "isSigner": false },
+        { "name": "userOldTokenAccount", "isMut": true, "isSigner": false },
+        { "name": "vaultOldTokenAccount", "isMut": true, "isSigner": false },
+        { "name": "tokenProgram", "isMut": false, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
       ],
       "args": [
         { "name": "amount", "type": "u64" }
-      ]
-    },
-    {
-      "name": "migrate",
-      "discriminator": [155, 234, 231, 146, 236, 158, 162, 30],
-      "accounts": [
-        { "name": "authority", "writable": true, "signer": true },
-        { "name": "sentinelConfig", "writable": true, "pda": { "seeds": [{ "kind": "const", "value": [115, 101, 110, 116, 105, 110, 101, 108, 95, 99, 111, 110, 102, 105, 103] }] } },
-        { "name": "vaultAuthority", "pda": { "seeds": [{ "kind": "const", "value": [118, 97, 117, 108, 116, 95, 97, 117, 116, 104, 111, 114, 105, 116, 121] }] } },
-        { "name": "vaultOldTokenAccount", "writable": true },
-        { "name": "vaultNewTokenAccount", "writable": true },
-        { "name": "tokenProgram", "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA" },
-        { "name": "dexProgram" }
-      ],
-      "args": [
-        { "name": "newTokenMint", "type": "publicKey" },
-        { "name": "minNewTokensOut", "type": "u64" }
       ]
     },
     {
       "name": "withdraw",
-      "discriminator": [183, 18, 70, 156, 148, 109, 161, 34],
       "accounts": [
-        { "name": "user", "writable": true, "signer": true },
-        { "name": "userVault", "writable": true, "pda": { "seeds": [{ "kind": "const", "value": [117, 115, 101, 114, 95, 118, 97, 117, 108, 116] }, { "kind": "account", "path": "user" }] } },
-        { "name": "sentinelConfig", "writable": true, "pda": { "seeds": [{ "kind": "const", "value": [115, 101, 110, 116, 105, 110, 101, 108, 95, 99, 111, 110, 102, 105, 103] }] } },
-        { "name": "vaultAuthority", "pda": { "seeds": [{ "kind": "const", "value": [118, 97, 117, 108, 116, 95, 97, 117, 116, 104, 111, 114, 105, 116, 121] }] } },
-        { "name": "vaultOldTokenAccount", "writable": true },
-        { "name": "userOldTokenAccount", "writable": true },
-        { "name": "tokenProgram", "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA" }
+        { "name": "user", "isMut": true, "isSigner": true },
+        { "name": "userVault", "isMut": true, "isSigner": false },
+        { "name": "sentinelConfig", "isMut": true, "isSigner": false },
+        { "name": "vaultAuthority", "isMut": false, "isSigner": false },
+        { "name": "vaultOldTokenAccount", "isMut": true, "isSigner": false },
+        { "name": "userOldTokenAccount", "isMut": true, "isSigner": false },
+        { "name": "tokenProgram", "isMut": false, "isSigner": false }
       ],
       "args": [
         { "name": "amount", "type": "u64" }
       ]
-    },
-    {
-      "name": "claim",
-      "discriminator": [62, 198, 214, 193, 213, 159, 108, 210],
-      "accounts": [
-        { "name": "user", "writable": true, "signer": true },
-        { "name": "userVault", "writable": true, "pda": { "seeds": [{ "kind": "const", "value": [117, 115, 101, 114, 95, 118, 97, 117, 108, 116] }, { "kind": "account", "path": "user" }] } },
-        { "name": "sentinelConfig", "writable": true, "pda": { "seeds": [{ "kind": "const", "value": [115, 101, 110, 116, 105, 110, 101, 108, 95, 99, 111, 110, 102, 105, 103] }] } },
-        { "name": "vaultAuthority", "pda": { "seeds": [{ "kind": "const", "value": [118, 97, 117, 108, 116, 95, 97, 117, 116, 104, 111, 114, 105, 116, 121] }] } },
-        { "name": "vaultNewTokenAccount", "writable": true },
-        { "name": "userNewTokenAccount", "writable": true },
-        { "name": "tokenProgram", "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA" }
-      ],
-      "args": []
     }
   ],
   "accounts": [
-    {
-      "name": "SentinelConfig",
-      "discriminator": [122, 49, 235, 89, 165, 2, 169, 246]
-    },
-    {
-      "name": "UserVault",
-      "discriminator": [82, 217, 185, 105, 192, 165, 155, 94]
-    }
-  ],
-  "types": [
-    {
-      "name": "MigrationStatus",
-      "type": {
-        "kind": "enum",
-        "variants": [
-          { "name": "NotStarted" },
-          { "name": "Completed" }
-        ]
-      }
-    },
     {
       "name": "SentinelConfig",
       "type": {
         "kind": "struct",
         "fields": [
           { "name": "authority", "type": "publicKey" },
-          { "name": "oldTokenMint", "type": "publicKey" },
-          { "name": "newTokenMint", "type": "publicKey" },
-          { "name": "vaultOldTokenAccount", "type": "publicKey" },
-          { "name": "vaultNewTokenAccount", "type": "publicKey" },
-          { "name": "totalOldDeposited", "type": "u64" },
-          { "name": "totalNewReceived", "type": "u64" },
-          { "name": "migrationStatus", "type": { "defined": { "name": "MigrationStatus" } } },
-          { "name": "dexProgramId", "type": "publicKey" },
-          { "name": "migrationTimestamp", "type": "i64" },
-          { "name": "bump", "type": "u8" }
+          { "name": "oldTokenMint", "type": "publicKey" }
         ]
       }
     },
@@ -125,32 +61,16 @@
         "kind": "struct",
         "fields": [
           { "name": "user", "type": "publicKey" },
-          { "name": "oldTokenDeposited", "type": "u64" },
-          { "name": "hasClaimed", "type": "bool" },
-          { "name": "depositTimestamp", "type": "i64" },
-          { "name": "bump", "type": "u8" }
+          { "name": "oldTokenDeposited", "type": "u64" }
         ]
       }
     }
   ],
+  "types": [],
+  "events": [],
   "errors": [
-    { "code": 6000, "name": "DepositAfterMigration", "msg": "Deposits are not allowed after migration has started" },
-    { "code": 6001, "name": "NoDepositsToMigrate", "msg": "No deposits to migrate" },
-    { "code": 6002, "name": "AlreadyClaimed", "msg": "User has already claimed their tokens" },
-    { "code": 6003, "name": "MigrationNotCompleted", "msg": "Migration has not been completed yet" },
-    { "code": 6004, "name": "DepositAmountTooSmall", "msg": "Deposit amount must be greater than zero" },
-    { "code": 6005, "name": "MigrationAlreadyCompleted", "msg": "Migration has already been completed" },
-    { "code": 6006, "name": "InvalidTokenMint", "msg": "Invalid token mint" },
-    { "code": 6007, "name": "Unauthorized", "msg": "Unauthorized: only admin can perform this action" },
-    { "code": 6008, "name": "NewTokenMintNotConfigured", "msg": "New token mint has not been configured" },
-    { "code": 6009, "name": "InvalidDexProgram", "msg": "Invalid DEX program" },
-    { "code": 6010, "name": "InsufficientNewTokens", "msg": "Insufficient new tokens in vault" },
-    { "code": 6011, "name": "ArithmeticOverflow", "msg": "Arithmetic overflow" },
-    { "code": 6012, "name": "AdminCannotClaim", "msg": "Admin cannot claim tokens" }
-  ],
-  "metadata": {
-    "name": "sentinel_vault",
-    "version": "0.1.0",
-    "spec": "0.1.0"
-  }
+    { "code": 6000, "name": "Unauthorized", "msg": "You are not authorized to perform this action." },
+    { "code": 6001, "name": "AlreadyInitialized", "msg": "The vault is already initialized." },
+    { "code": 6002, "name": "InsufficientFunds", "msg": "Insufficient funds." }
+  ]
 }
