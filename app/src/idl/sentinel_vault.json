@@ -44,7 +44,7 @@
         { "name": "dexProgram" }
       ],
       "args": [
-        { "name": "newTokenMint", "type": "pubkey" },
+        { "name": "newTokenMint", "type": "publicKey" },
         { "name": "minNewTokensOut", "type": "u64" }
       ]
     },
@@ -105,15 +105,15 @@
       "type": {
         "kind": "struct",
         "fields": [
-          { "name": "authority", "type": "pubkey" },
-          { "name": "oldTokenMint", "type": "pubkey" },
-          { "name": "newTokenMint", "type": "pubkey" },
-          { "name": "vaultOldTokenAccount", "type": "pubkey" },
-          { "name": "vaultNewTokenAccount", "type": "pubkey" },
+          { "name": "authority", "type": "publicKey" },
+          { "name": "oldTokenMint", "type": "publicKey" },
+          { "name": "newTokenMint", "type": "publicKey" },
+          { "name": "vaultOldTokenAccount", "type": "publicKey" },
+          { "name": "vaultNewTokenAccount", "type": "publicKey" },
           { "name": "totalOldDeposited", "type": "u64" },
           { "name": "totalNewReceived", "type": "u64" },
           { "name": "migrationStatus", "type": { "defined": { "name": "MigrationStatus" } } },
-          { "name": "dexProgramId", "type": "pubkey" },
+          { "name": "dexProgramId", "type": "publicKey" },
           { "name": "migrationTimestamp", "type": "i64" },
           { "name": "bump", "type": "u8" }
         ]
@@ -124,7 +124,7 @@
       "type": {
         "kind": "struct",
         "fields": [
-          { "name": "user", "type": "pubkey" },
+          { "name": "user", "type": "publicKey" },
           { "name": "oldTokenDeposited", "type": "u64" },
           { "name": "hasClaimed", "type": "bool" },
           { "name": "depositTimestamp", "type": "i64" },
