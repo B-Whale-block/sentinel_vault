@@ -15,14 +15,6 @@ export const metadata: Metadata = {
     description: "Secure token migration protocol on Solana. Trustless liquidity migration with proportional token distribution.",
     url: "https://sentinel-vault.vercel.app",
     siteName: "Sentinel Vault",
-    images: [
-      {
-        url: "/og-image.svg",
-        width: 1200,
-        height: 630,
-        alt: "Sentinel Vault - Secure Token Migration Protocol",
-      },
-    ],
     locale: "en_US",
     type: "website",
   },
@@ -30,7 +22,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sentinel Vault",
     description: "Secure token migration protocol on Solana. Trustless liquidity migration with proportional token distribution.",
-    images: ["/og-image.svg"],
   },
   icons: {
     icon: "/icon.svg",
