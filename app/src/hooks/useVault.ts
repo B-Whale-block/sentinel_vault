@@ -106,7 +106,17 @@ export function useVault() {
     }
 
     return execTx(
-      () => initialize(program, publicKey, mint),
+      () => program.methods
+        .initialize(mint, SystemProgram.programId) 
+        .accounts({
+          authority: publicKey,
+          sentinelConfig: PublicKey.findProgramAddressSync(
+            [Buffer.from("sentinel_config")],
+            program.programId
+          )[0],
+          systemProgram: SystemProgram.programId,
+        })
+        .rpc(),
       "Initialized!",
       "Initializing vault..."
     );
