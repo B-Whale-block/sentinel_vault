@@ -17,7 +17,9 @@ import {
   TOKEN_MINT,
 } from "../utils/program";
 
-type TxStatus = { type: "success" | "error" | "info"; message: string } | null;
+// 1. FIX: Define the status type separately so we can use it easily
+type StatusType = "success" | "error" | "info";
+type TxStatus = { type: StatusType; message: string } | null;
 
 export function useVault() {
   const { connection } = useConnection();
@@ -29,8 +31,9 @@ export function useVault() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<TxStatus>(null);
 
-  const showStatus = useCallback((type: TxStatus["type"], message: string) => {
-    setStatus({ type: type!, message });
+  // 2. FIX: Use the specific "StatusType" here
+  const showStatus = useCallback((type: StatusType, message: string) => {
+    setStatus({ type, message });
     setTimeout(() => setStatus(null), 5000);
   }, []);
 
@@ -90,7 +93,6 @@ export function useVault() {
     }
   };
 
-  // --- STANDARD INITIALIZE (Now works because IDL is fixed) ---
   const handleInitialize = async (mintAddress: string) => {
     const program = getProgram();
     if (!program || !publicKey) return false;
