@@ -2,12 +2,10 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-// FIX: Added SystemProgram to the imports below
 import { PublicKey, SystemProgram } from "@solana/web3.js";
 import {
   createProvider,
   createProgram,
-  initialize,
   deposit,
   withdraw,
   fetchUserVault,
@@ -21,6 +19,7 @@ import {
 type StatusType = "success" | "error" | "info";
 type TxStatus = { type: StatusType; message: string } | null;
 
+/** Hook for vault state management and transaction handling. */
 export function useVault() {
   const { connection } = useConnection();
   const wallet = useWallet();
@@ -46,6 +45,7 @@ export function useVault() {
     return createProgram(provider);
   }, [connection, publicKey, wallet]);
 
+  /** Refresh vault and wallet balances. */
   const refresh = useCallback(async () => {
     const program = getProgram();
     if (!program || !publicKey) return;
@@ -53,11 +53,10 @@ export function useVault() {
     try {
       const vault = await fetchUserVault(program, publicKey);
       setVaultBalance(vault ? formatAmount(vault.oldTokenDeposited) : "0");
-
       const balance = await getTokenBalance(connection, publicKey, TOKEN_MINT);
       setWalletBalance(formatAmount(balance));
     } catch (e) {
-      console.error("Failed to fetch balances:", e);
+      console.error("[Svalinn] Balance fetch failed:", e);
     }
   }, [connection, publicKey, getProgram]);
 
@@ -70,6 +69,7 @@ export function useVault() {
     }
   }, [connected, refresh]);
 
+  /** Execute transaction with status feedback. */
   const execTx = async (
     action: () => Promise<string>,
     successMsg: string,
@@ -92,6 +92,7 @@ export function useVault() {
     }
   };
 
+  /** Initialize vault with token mint. Admin only. */
   const handleInitialize = async (mintAddress: string) => {
     const program = getProgram();
     if (!program || !publicKey) return false;
@@ -104,10 +105,9 @@ export function useVault() {
       return false;
     }
 
-    // We pass SystemProgram.programId as a dummy address for the 2nd argument
     return execTx(
       () => program.methods
-        .initialize(mint, SystemProgram.programId) 
+        .initialize(mint, SystemProgram.programId)
         .accounts({
           authority: publicKey,
           sentinelConfig: PublicKey.findProgramAddressSync(
@@ -122,6 +122,7 @@ export function useVault() {
     );
   };
 
+  /** Deposit tokens into vault. */
   const handleDeposit = async (amount: string) => {
     const program = getProgram();
     if (!program || !publicKey) return false;
@@ -141,6 +142,7 @@ export function useVault() {
     );
   };
 
+  /** Withdraw tokens from vault. */
   const handleWithdraw = async (amount: string) => {
     const program = getProgram();
     if (!program || !publicKey) return false;

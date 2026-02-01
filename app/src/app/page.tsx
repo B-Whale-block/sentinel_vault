@@ -234,7 +234,6 @@ function ActionCard({
 }) {
   const isBurn = variant === "burn";
 
-  // Parse the balance string (handles comma formatting)
   const parseBalance = (bal: string) => {
     const num = parseFloat(bal.replace(/,/g, ""));
     return isNaN(num) ? 0 : num;
