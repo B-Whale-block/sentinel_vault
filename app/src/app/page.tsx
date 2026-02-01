@@ -3,7 +3,7 @@
 import { useState } from "react";
 import WalletButton from "../components/WalletButton";
 import { Toast } from "../components/Toast";
-import { LockIcon, DownArrowIcon, UpArrowIcon, SettingsIcon, ChevronIcon } from "../components/icons";
+import { ShieldIcon, DownArrowIcon, UpArrowIcon, SettingsIcon, ChevronIcon } from "../components/icons";
 import { useVault } from "../hooks/useVault";
 import { PROGRAM_ID, TOKEN_MINT } from "../utils/program";
 
@@ -39,10 +39,13 @@ export default function Dashboard() {
         <div className="flex items-center gap-3 sm:gap-4">
           <div className="relative flex h-10 w-10 flex-shrink-0 items-center justify-center sm:h-12 sm:w-12">
             <div className="absolute inset-0 animate-pulse rounded-lg bg-cyan-400/20" />
-            <LockIcon className="relative z-10 h-6 w-6 text-cyan-400 sm:h-8 sm:w-8" />
+            <ShieldIcon className="relative z-10 h-6 w-6 text-cyan-400 sm:h-8 sm:w-8" />
           </div>
           <div className="min-w-0">
-            <h1 className="text-svalinn-gradient truncate text-xl font-black tracking-widest sm:text-3xl">SVALINN</h1>
+            <div className="flex items-center gap-2">
+              <h1 className="text-svalinn-gradient truncate text-xl font-black tracking-widest sm:text-3xl">SVALINN</h1>
+              <span className="rounded border border-cyan-500/30 bg-cyan-500/10 px-1.5 py-0.5 font-mono text-[10px] text-cyan-500/50">v0.1.0</span>
+            </div>
             <p className="mt-1 text-xs italic text-slate-400 sm:text-sm">"If Svalinn were to fall, the mountains and sea would burn up."</p>
           </div>
         </div>
